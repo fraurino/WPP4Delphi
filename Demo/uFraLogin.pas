@@ -41,6 +41,9 @@ type
     ProgressBar1: TProgressBar;
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure whatsOnClick(Sender: TObject);
+    procedure whatsOffClick(Sender: TObject);
+    procedure rgTipoLoginClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,6 +55,11 @@ implementation
 {$R *.dfm}
 
 uses uFrDemo;
+
+procedure TframeLogin.rgTipoLoginClick(Sender: TObject);
+begin
+  frDemo.TWPPConnect1.FormQrCodeType := TFormQrCodeType(rgTipoLogin.ItemIndex);
+end;
 
 procedure TframeLogin.SpeedButton1Click(Sender: TObject);
 begin
@@ -72,6 +80,22 @@ begin
 
    frDemo.TWPPConnect1.Logout;
    frDemo.TWPPConnect1.Disconnect;
+end;
+
+procedure TframeLogin.whatsOffClick(Sender: TObject);
+begin
+  if not frDemo.TWPPConnect1.auth then
+    exit;
+
+  frDemo.TWPPConnect1.IsOnline;
+end;
+
+procedure TframeLogin.whatsOnClick(Sender: TObject);
+begin
+  if not frDemo.TWPPConnect1.auth then
+    exit;
+
+  frDemo.TWPPConnect1.IsOnline;
 end;
 
 end.

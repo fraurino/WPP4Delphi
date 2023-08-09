@@ -1677,11 +1677,23 @@ object frDemo: TfrDemo
         ExplicitTop = 278
         ExplicitHeight = 309
         inherited tsImage: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 26
+          ExplicitWidth = 229
           ExplicitHeight = 279
           inherited Image1: TImage
             Height = 264
             ExplicitHeight = 264
           end
+          inherited lblCaminhoImagem: TLabel
+            Width = 229
+          end
+        end
+        inherited tsBase64: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 26
+          ExplicitWidth = 229
+          ExplicitHeight = 191
         end
       end
     end
@@ -1820,9 +1832,6 @@ object frDemo: TfrDemo
       Width = 118
       ExplicitLeft = 5
       ExplicitWidth = 118
-    end
-    inherited rgTipoLogin: TRadioGroup
-      ItemIndex = 1
     end
   end
   inline frameCatalogo1: TframeCatalogo
@@ -2038,6 +2047,10 @@ object frDemo: TfrDemo
           inherited btnCriarGrupo: TBitBtn
             OnClick = frameComunidades1btnCriarGrupoClick
           end
+        end
+        inherited Memo1: TMemo
+          Left = 92
+          ExplicitLeft = 92
         end
       end
       inherited pnlGruposParticipantes: TPanel
@@ -5679,6 +5692,7 @@ object frDemo: TfrDemo
     AjustNumber.DDIDefault = 55
     FormQrCodeType = Ft_Http
     OnGetAllContactList = TWPPConnect1GetAllContactList
+    OnGetMyContactsList = TWPPConnect1GetMyContactsList
     OnGetAllGroupList = TWPPConnect1GetAllGroupList
     OnGetAllCommunitys = TWPPConnect1GetAllCommunitys
     OnGetAllGroupAdmins = TWPPConnect1GetAllGroupAdmins
@@ -5702,8 +5716,10 @@ object frDemo: TfrDemo
     OnGetIsReady = TWPPConnect1GetIsReady
     OnGetIsLoaded = TWPPConnect1GetIsLoaded
     OnGetIsAuthenticated = TWPPConnect1GetIsAuthenticated
-    OnGetMessageACK = TWPPConnect1GetMessageACK
+    OnGetIsOnline = TWPPConnect1GetIsOnline
+    OnGetEnvIsOnline = TWPPConnect1GetEnvIsOnline
     OnGetListChat = TWPPConnect1GetListChat
+    OnGetMessageACK = TWPPConnect1GetMessageACK
     OnGetCheckIsValidNumber = TWPPConnect1GetCheckIsValidNumber
     OnGetProfilePicThumb = TWPPConnect1GetProfilePicThumb
     OnGetMyNumber = TWPPConnect1GetMyNumber
@@ -5718,6 +5734,13 @@ object frDemo: TfrDemo
     OnCheckNumberExists = TWPPConnect1CheckNumberExists
     OnGetLastSeen = TWPPConnect1GetLastSeen
     OnGetPlatformFromMessage = TWPPConnect1GetPlatformFromMessage
+    OnGetPoolResponse = TWPPConnect1GetPoolResponse
+    OnGetPoolResponseEvento = TWPPConnect1GetPoolResponseEvento
+    OnGetReactResponseEvento = TWPPConnect1GetReactResponseEvento
+    OnGetNewMessageResponseEvento = TWPPConnect1GetNewMessageResponseEvento
+    OnGet_SendPollMessageResponse = TWPPConnect1Get_SendPollMessageResponse
+    OnGetAck_changeEvento = TWPPConnect1GetAck_changeEvento
+    OnGetmsg_revokeEvento = TWPPConnect1Getmsg_revokeEvento
     OnGetHistorySyncProgress = TWPPConnect1GetHistorySyncProgress
     OnGetQrCodeDesconectouErroCache = TWPPConnect1GetQrCodeDesconectouErroCache
     Left = 288

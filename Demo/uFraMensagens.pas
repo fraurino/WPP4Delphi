@@ -88,6 +88,10 @@ type
     bTextoMarcandoTodosGrupo: TButton;
     Button3: TButton;
     Button4: TButton;
+    btnLigar: TButton;
+    btnEncerrarChamada: TButton;
+    eChoicesPool: TEdit;
+    Label2: TLabel;
     procedure edtURLDblClick(Sender: TObject);
     procedure btnTextoSimplesClick(Sender: TObject);
     procedure btnBotaoSimplesClick(Sender: TObject);
@@ -132,6 +136,8 @@ type
     procedure bTextoMarcandoTodosGrupoClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure btnLigarClick(Sender: TObject);
+    procedure btnEncerrarChamadaClick(Sender: TObject);
   private
     { Private declarations }
      FStatus: Boolean;
@@ -369,6 +375,37 @@ end;
 
 procedure TframeMensagem.btnBotaoSimplesClick(Sender: TObject);
 var
+  LDescricao: String;
+  LChoices, Options: String;
+begin
+  if not frDemo.TWPPConnect1.Auth then
+     Exit;
+
+  LDescricao:= InputBox('Informe a descrição da votação','Descrição','Votação WPPConnect');
+
+  if LDescricao = '' then
+    exit;
+
+  if Trim(ed_num.Text) = '' then
+  begin
+    messageDlg('Informe o Contato para Continuar', mtWarning, [mbOk], 0);
+    ed_num.SetFocus;
+    Exit;
+  end;
+
+  LChoices := '["OPÇÃO 1","OPÇÃO 2","OPÇÃO 3"]';
+  //LChoices := '["Bolo","Cachorro Quente"]';
+
+  if eChoicesPool.Text <> '' then
+    LChoices := eChoicesPool.Text;
+
+  Options := 'createchat:true, selectableCount:1'; // Apenas 1 Escolha
+  //Options := 'createchat:true, selectableCount:0'; // Multipla Escolha
+
+  //frDemo.TWPPConnect1.CreatePool(ed_num.Text, LDescricao, LChoices, Options);
+  frDemo.TWPPConnect1.CreatePoolEx(ed_num.Text, LDescricao, LChoices, Options, '123', 'Enquete01');
+
+(*var
   S_RETORNO, options : wideString;
 begin
   try
@@ -415,7 +452,7 @@ begin
   finally
     ed_num.SelectAll;
     ed_num.SetFocus;
-  end;
+  end;*)
 end;
 
 procedure TframeMensagem.btnContatoClick(Sender: TObject);
@@ -1471,9 +1508,58 @@ begin
 
 end;
 
+procedure TframeMensagem.btnLigarClick(Sender: TObject);
+ var
+  options: string;
+begin
+  try
+    if Trim(ed_num.Text) = '' then
+    begin
+      messageDlg('Informe o Celular para Continuar', mtWarning, [mbOk], 0);
+      ed_num.SetFocus;
+      Exit;
+    end;
+
+    if not frDemo.TWPPConnect1.Auth then
+      Exit;
+
+    options := '';
+    //options := 'isVideo: true'; //Chamada de Video
+
+    //frDemo.TWPPConnect1.sendLinkPreview(ed_num.text, edtUrl.text, options);
+    frDemo.TWPPConnect1.SendCall(ed_num.text, options);
+
+  finally
+    ed_num.SelectAll;
+    ed_num.SetFocus;
+  end;
+end;
+
+procedure TframeMensagem.btnEncerrarChamadaClick(Sender: TObject);
+begin
+  try
+    {if Trim(ed_num.Text) = '' then
+    begin
+      messageDlg('Informe o Celular para Continuar', mtWarning, [mbOk], 0);
+      ed_num.SetFocus;
+      Exit;
+    end;}
+
+    if not frDemo.TWPPConnect1.Auth then
+      Exit;
+
+    //frDemo.TWPPConnect1.EndCall(ed_num.text);
+    frDemo.TWPPConnect1.EndCallALL;
+
+  finally
+    ed_num.SelectAll;
+    ed_num.SetFocus;
+  end;
+end;
+
 procedure TframeMensagem.btnArquivoClick(Sender: TObject);
 var
-  caption : string;
+  caption, Extensao : string;
   caminhoArquivo : string;
   isFigurinha : Boolean;
 begin
@@ -1500,7 +1586,11 @@ begin
     else
       Exit;
 
-    isFigurinha := False;
+    Extensao  := LowerCase(Copy(ExtractFileExt(caminhoArquivo),2,5));
+
+    if Extensao = 'webp' then
+      isFigurinha := True else
+      isFigurinha := False;
 
     //Arquivo Selecionado da Pasta
     frDemo.TWPPConnect1.SendFileMessageEx(ed_num.text, caminhoArquivo, '123', caption, isFigurinha);
@@ -1519,7 +1609,8 @@ end;
 
 procedure TframeMensagem.btnListarCOntatosClick(Sender: TObject);
 begin
-  frDemo.TWPPConnect1.getAllContacts;
+  //frDemo.TWPPConnect1.getAllContacts;
+  frDemo.TWPPConnect1.getMyContacts;
 end;
 
 procedure TframeMensagem.edtURLDblClick(Sender: TObject);
@@ -1535,9 +1626,16 @@ end;
 
 procedure TframeMensagem.listaContatosDblClick(Sender: TObject);
 begin
-  ed_num.text := copy(listaContatos.Items[listaContatos.Selected.Index].SubItems
-    [1], 0, pos('@', listaContatos.Items[listaContatos.Selected.Index].SubItems
-    [1])) + 'c.us';
+  if pos('@lid', listaContatos.Items[listaContatos.Selected.Index].SubItems[1]) > 0 then
+  begin
+    ed_num.text := frDemo.SomenteNumero(copy(listaContatos.Items[listaContatos.Selected.Index].SubItems[1],
+      pos('-', listaContatos.Items[listaContatos.Selected.Index].SubItems[1]) + 1, length(listaContatos.Items[listaContatos.Selected.Index].SubItems[1])));
+    ed_num.Text := Copy(ed_num.Text, 1, length(ed_num.Text)-1);
+    ed_num.Text :=  ed_num.Text + '@c.us'
+  end
+  else
+    ed_num.text := copy(listaContatos.Items[listaContatos.Selected.Index].SubItems[1], 0,
+      pos('@', listaContatos.Items[listaContatos.Selected.Index].SubItems[1])) + 'c.us';
 end;
 
 {$REGION 'CONVERSAO BASE64'}

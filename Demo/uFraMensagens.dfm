@@ -26,6 +26,13 @@ object frameMensagem: TframeMensagem
       Height = 15
       Caption = 'Mensagem:'
     end
+    object Label2: TLabel
+      Left = 12
+      Top = 232
+      Width = 109
+      Height = 15
+      Caption = 'Array Choices Pool'
+    end
     object ed_num: TLabeledEdit
       Left = 11
       Top = 24
@@ -40,7 +47,7 @@ object frameMensagem: TframeMensagem
       Left = 11
       Top = 77
       Width = 214
-      Height = 201
+      Height = 148
       ScrollBars = ssVertical
       TabOrder = 1
     end
@@ -71,7 +78,6 @@ object frameMensagem: TframeMensagem
       Cursor = crHandPoint
       ActivePage = tsImage
       Align = alBottom
-      Anchors = [akLeft, akTop, akRight, akBottom]
       TabOrder = 3
       object tsImage: TTabSheet
         Caption = 'Image Preview'
@@ -112,6 +118,14 @@ object frameMensagem: TframeMensagem
         end
       end
     end
+    object eChoicesPool: TEdit
+      Left = 12
+      Top = 252
+      Width = 213
+      Height = 23
+      TabOrder = 4
+      Text = '["OP'#199#195'O 1","OP'#199#195'O 2","OP'#199#195'O 3"]'
+    end
   end
   object gbAcoesBasicas: TGroupBox
     AlignWithMargins = True
@@ -133,6 +147,7 @@ object frameMensagem: TframeMensagem
       ImageIndex = 11
       Images = ImageList1
       TabOrder = 12
+      Visible = False
       OnClick = btnLocalizacaoBotaoClick
     end
     object btnLink: TButton
@@ -159,6 +174,7 @@ object frameMensagem: TframeMensagem
       ImageIndex = 5
       Images = ImageList1
       TabOrder = 6
+      Visible = False
       OnClick = btnImagemBotaoClick
     end
     object btnImagem: TButton
@@ -185,6 +201,7 @@ object frameMensagem: TframeMensagem
       ImageIndex = 4
       Images = ImageList1
       TabOrder = 4
+      Visible = False
       OnClick = btnVideoBotaoClick
     end
     object btnVideo: TButton
@@ -213,6 +230,7 @@ object frameMensagem: TframeMensagem
       ImageIndex = 2
       Images = ImageList1
       TabOrder = 2
+      Visible = False
       OnClick = btnListaMenuClick
     end
     object btnBotaoSimples: TButton
@@ -222,7 +240,7 @@ object frameMensagem: TframeMensagem
       Width = 221
       Height = 25
       Align = alTop
-      Caption = 'Bot'#245'es Simples'
+      Caption = 'Criar Vota'#231#227'o'
       HotImageIndex = 2
       ImageIndex = 1
       Images = ImageList1
@@ -371,6 +389,32 @@ object frameMensagem: TframeMensagem
       Images = ImageList1
       TabOrder = 18
       OnClick = bTextoMarcandoTodosGrupoClick
+    end
+    object btnLigar: TButton
+      AlignWithMargins = True
+      Left = 5
+      Top = 609
+      Width = 221
+      Height = 25
+      Align = alTop
+      Caption = 'Realizar uma Liga'#231#227'o'
+      ImageIndex = 19
+      Images = ImageList1
+      TabOrder = 19
+      OnClick = btnLigarClick
+    end
+    object btnEncerrarChamada: TButton
+      AlignWithMargins = True
+      Left = 5
+      Top = 640
+      Width = 221
+      Height = 25
+      Align = alTop
+      Caption = 'Finalizar uma Liga'#231#227'o'
+      ImageIndex = 19
+      Images = ImageList1
+      TabOrder = 20
+      OnClick = btnEncerrarChamadaClick
     end
   end
   object GroupBox2: TGroupBox
@@ -629,7 +673,6 @@ object frameMensagem: TframeMensagem
       Images = ImageList1
       TabOrder = 18
       OnClick = Button3Click
-      ExplicitLeft = 0
     end
     object Button4: TButton
       AlignWithMargins = True
@@ -644,8 +687,6 @@ object frameMensagem: TframeMensagem
       Images = ImageList1
       TabOrder = 19
       OnClick = Button4Click
-      ExplicitLeft = 10
-      ExplicitTop = 586
     end
   end
   object GroupBox3: TGroupBox
@@ -655,6 +696,7 @@ object frameMensagem: TframeMensagem
     Width = 231
     Height = 675
     Align = alLeft
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = 'Fun'#231#245'es Diversas'
     TabOrder = 3
     object groupListaContatos: TGroupBox
