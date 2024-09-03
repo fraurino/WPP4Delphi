@@ -12,7 +12,7 @@ object FrmConsole: TFrmConsole
   Font.Name = 'Tahoma'
   Font.Style = []
   KeyPreview = True
-  OldCreateOrder = False
+  OldCreateOrder = True
   Position = poOwnerFormCenter
   ShowHint = True
   OnClose = FormClose
@@ -619,7 +619,7 @@ object FrmConsole: TFrmConsole
       OnClick = bDeleteAllChatClick
     end
     object bFinish: TBitBtn
-      Left = 734
+      Left = 728
       Top = 68
       Width = 145
       Height = 25
@@ -759,6 +759,7 @@ object FrmConsole: TFrmConsole
     OnBeforeClose = Chromium1BeforeClose
     OnClose = Chromium1Close
     OnOpenUrlFromTab = Chromium1OpenUrlFromTab
+    OnRenderProcessTerminated = Chromium1RenderProcessTerminated
     Left = 56
     Top = 136
   end
