@@ -43,7 +43,8 @@ uses
 
   System.SysUtils, System.Classes, Vcl.Forms, Vcl.Dialogs, System.MaskUtils,
   System.UiTypes,  Generics.Collections, System.TypInfo, Data.DB, Vcl.ExtCtrls,
-  uTWPPConnect.Diversos, Vcl.Imaging.jpeg, DateUtils, IniFiles, uTWPPConnect.ChatList;
+  uTWPPConnect.Diversos, Vcl.Imaging.jpeg, DateUtils, IniFiles, uTWPPConnect.ChatList,
+  IPPeerClient;
 
 
 type
@@ -2229,7 +2230,7 @@ begin
           if Assigned(FrmConsole) then
           begin
             FrmConsole.GetAllParticipantsGroup(PIDGroup);
-            FrmConsole.listGroupAdmins(PIDGroup);
+            //FrmConsole.listGroupAdmins(PIDGroup);
           end;
         end);
 

@@ -1561,7 +1561,7 @@ object frDemo: TfrDemo
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 746
+      Left = 606
       Top = 63
       Width = 146
       Height = 19
@@ -1585,6 +1585,19 @@ object frDemo: TfrDemo
       Font.Style = []
       ParentFont = False
     end
+    object Label2: TLabel
+      Left = 851
+      Top = 63
+      Width = 93
+      Height = 19
+      Caption = 'Url Typebot::'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Roboto'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object btnAbrirZap: TBitBtn
       Left = 128
       Top = 82
@@ -1594,36 +1607,27 @@ object frDemo: TfrDemo
       TabOrder = 0
       OnClick = btnAbrirZapClick
     end
-    object BitBtn2: TBitBtn
-      Left = 447
-      Top = 82
-      Width = 150
-      Height = 25
-      Caption = 'Progress WhatsApp'
-      TabOrder = 1
-      OnClick = BitBtn2Click
-    end
     object BitBtn3: TBitBtn
-      Left = 603
+      Left = 463
       Top = 82
       Width = 134
       Height = 25
       BiDiMode = bdRightToLeft
       Caption = 'Start ChatGPT'
       ParentBiDiMode = False
-      TabOrder = 2
+      TabOrder = 1
       OnClick = BitBtn3Click
     end
     object edtApiKeyChatGPT: TEdit
-      Left = 746
+      Left = 606
       Top = 84
-      Width = 271
+      Width = 239
       Height = 23
-      TabOrder = 3
+      TabOrder = 2
     end
     object SwtChatGPT: TToggleSwitch
-      Left = 938
-      Top = 58
+      Left = 764
+      Top = 60
       Width = 79
       Height = 21
       Font.Charset = ANSI_CHARSET
@@ -1632,7 +1636,28 @@ object frDemo: TfrDemo
       Font.Name = 'Roboto'
       Font.Style = [fsBold]
       ParentFont = False
+      TabOrder = 3
+    end
+    object eUrlTypebot: TEdit
+      Left = 851
+      Top = 84
+      Width = 224
+      Height = 23
       TabOrder = 4
+    end
+    object SwtTypebot: TToggleSwitch
+      Left = 995
+      Top = 60
+      Width = 79
+      Height = 21
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Roboto'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
+      OnClick = SwtTypebotClick
     end
   end
   object pnlrodape: TPanel
@@ -1709,84 +1734,112 @@ object frDemo: TfrDemo
         end
       end
     end
-    inherited gbAcoesBasicas: TGroupBox
+    inherited gbAcoesBasicas: TScrollBox
       Height = 589
       ExplicitHeight = 589
-      inherited btnLocalizacaoBotao: TButton
-        ExplicitTop = 609
-      end
-      inherited btnLink: TButton
-        ExplicitTop = 361
-      end
-      inherited btnImagemBotao: TButton
-        ExplicitTop = 640
-      end
       inherited btnImagem: TButton
         OnClick = frameMensagem1btnImagemClick
-        ExplicitTop = 237
-      end
-      inherited btnInstantVideo: TButton
-        ExplicitTop = 206
-      end
-      inherited btnAudio: TButton
-        ExplicitTop = 392
-      end
-      inherited btnContato: TButton
-        ExplicitTop = 454
-      end
-      inherited btnSticker: TButton
-        ExplicitTop = 423
-      end
-      inherited btnLocalizacao: TButton
-        ExplicitTop = 485
-      end
-      inherited btnArquivo: TButton
-        ExplicitTop = 578
-      end
-      inherited btnStatusTexto: TButton
-        ExplicitTop = 671
-      end
-      inherited btnStatusImagem: TButton
-        ExplicitTop = 702
-      end
-      inherited btnVideoStatus: TButton
-        ExplicitTop = 733
-      end
-      inherited Button2: TButton
-        ExplicitTop = 764
-      end
-      inherited bTextoMarcandoTodosGrupo: TButton
-        ExplicitTop = 795
-      end
-      inherited btnLigar: TButton
-        ExplicitTop = 826
-      end
-      inherited btnEncerrarChamada: TButton
-        ExplicitTop = 857
-      end
-      inherited Button5: TButton
-        ExplicitTop = 547
-      end
-      inherited btnPoolMessage: TButton
-        ExplicitTop = 516
-      end
-      inherited btnImageButton: TButton
-        ExplicitTop = 330
-      end
-      inherited SendPix: TButton
-        ExplicitTop = 268
-      end
-      inherited SendDocumentButton: TButton
-        ExplicitTop = 299
-      end
-      inherited btnSendVideoButton: TButton
-        ExplicitLeft = 5
-        ExplicitTop = 175
       end
     end
-    inherited GroupBox2: TGroupBox
+    inherited gbAcoesChats: TScrollBox
       Height = 589
       ExplicitHeight = 589
+      inherited btnLimparConversa: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnArquivar: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnResponder: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnReagir: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnVerificarNumero: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnStatus: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnDetalhe: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnBloquear: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnDesbloquear: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnFixarChat: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnDesfixarChat: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited BitBtn1: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited BitBtn2: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnArquivarTodosChats: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnDeletarTodosChats: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited Button1: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnValidarListarNumeros: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnGetMessage: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited Button3: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited Button4: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited bEditMessage: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited btnDeletarOldChat: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited bGetMe: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
+      inherited bGetMensagem: TButton
+        Width = 204
+        ExplicitWidth = 204
+      end
     end
     inherited GroupBox3: TGroupBox
       Height = 589
@@ -5775,8 +5828,7 @@ object frDemo: TfrDemo
     InjectJS.DownloadJSType = DT_Indy
     Config.AutoDelay = 500
     Config.ReceiveAttachmentAuto = False
-    Config.ReceiveAttachmentPath = 'C:\Executaveis\TWPPConnectAnexos\TWPPConnectAnexos\'
-    Config.SecondsMonitor = 40
+    Config.ReceiveAttachmentPath = 'C:\Executaveis\TWPPConnectAnexos\'
     Config.Evento_msg_ack_change = True
     Config.Evento_msg_revoke = True
     Config.Evento_new_message = True
@@ -5913,9 +5965,9 @@ object frDemo: TfrDemo
   end
   object TimerIsOnline: TTimer
     Enabled = False
-    Interval = 4000
+    Interval = 40000
     OnTimer = TimerIsOnlineTimer
-    Left = 388
+    Left = 384
     Top = 8
   end
 end

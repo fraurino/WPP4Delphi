@@ -31,7 +31,7 @@ type
     mem_message: TMemo;
     Label1: TLabel;
     edtURL: TLabeledEdit;
-    gbAcoesBasicas: TGroupBox;
+    gbAcoesBasicas: TScrollBox;
     btnLocalizacaoBotao: TButton;
     btnLink: TButton;
     btnImagemBotao: TButton;
@@ -41,7 +41,7 @@ type
     btnListaMenu: TButton;
     btnBotaoSimples: TButton;
     btnTextoSimples: TButton;
-    GroupBox2: TGroupBox;
+    gbAcoesChats: TScrollBox;
     GroupBox3: TGroupBox;
     btnAudio: TButton;
     btnContato: TButton;
@@ -323,11 +323,8 @@ begin
     end;
 
     for I := 0 to frDemo.frameGrupos1.listaParticipantes.Items.Count -1 do
-    begin
-      //listaParticipantes
-      //mentionedList := mentionedList + '"' + frDemo.frameGrupos1.listaParticipantes.Items[frDemo.frameGrupos1.listaParticipantes.Selected.Index].SubItems[1] + '"' + ',';
       mentionedList := mentionedList + '"' + Copy(frDemo.frameGrupos1.listaParticipantes.Items[I].SubItems[1],1,Pos('@', frDemo.frameGrupos1.listaParticipantes.Items[I].SubItems[1])) + 'c.us' + '"' + ',';
-    end;
+
 
     mentionedList := Copy(mentionedList,1,Length(mentionedList)-1);
     mentionedList := ',mentionedList: [' + mentionedList + ']';
@@ -339,10 +336,8 @@ begin
     //frDemo.TWPPConnect1.markIsComposing(ed_num.Text, '5000'); //Digitando 5 Segundos
     //Sleep(5000);
 
-    frDemo.TWPPConnect1.Send(ed_num.Text, mem_message.Text);
 
-    //frDemo.TWPPConnect1.SendTextMessage(ed_num.Text, mem_message.Text, options, '');
-    //frDemo.TWPPConnect1.SendTextMessageEx(ed_num.Text, mem_message.Text, options, '123');
+    frDemo.TWPPConnect1.SendTextMessageEx(ed_num.Text, mem_message.Text, options, '123');
   finally
     ed_num.SelectAll;
     ed_num.SetFocus;
@@ -473,14 +468,16 @@ begin
     options :=
       //'useTemplateButtons: undefined,' + //deprecated
       //'useTemplateButtons: true,' +  //deprecated
-      'createChat: true, ' +
-      'useInteractiveMesssage: true, ' + //Is Working Android and iOS
+      //'createChat: true, ' +
+      //'useInteractiveMesssage: true, ' + //Is Working Android and iOS
 
-      'buttons: ' +
+      'buttons:' +
       '[ ' +
         //Action Button
-        '{url: "https://wppconnect-team.github.io/", text: "🌐️ Acesse Nosso Site"}, ' +
-        //'{url: "https://wa.me/5517981388414", text: "Fale Conosco"}, ' +
+        (*'{url:"https://www.whatsapp.com/otp/code/?otp_type=COPY_CODE&code_expiration_minutes=10&code=otp881320",' +
+        'text:"Copiar"},' +
+        '{url:"https://wppconnect-team.github.io/",text:"Acesse Nosso Site"},' +*)
+        //'{url:"https://wa.me/5517981388414", text: "Fale Conosco"}, ' +
         //'{phoneNumber: "0800404", text: "☎️ Qualquer Dúvida Ligue"}, ' +
 
 
@@ -494,8 +491,9 @@ begin
         '    text: "NÃO"  ' +
         '  },  ' +
 
+
         //Copy Button
-        '{ ' +
+        (*'{ ' +
         '    raw: { ' +
         '        name: "cta_copy", ' +
         '        buttonParamsJson: JSON.stringify({ ' +
@@ -503,7 +501,7 @@ begin
         '            copy_code: "17981388414", ' +
         '        }) ' +
         '    } ' +
-        '} ' +
+        '} ' +*)
 
 
       '] ' +
@@ -514,7 +512,7 @@ begin
       //'';
 
     //S_RETORNO := TWPPConnectEmoticons.robot + ' *Confirma Visita do Nosso Técnico?* ' + '\n';
-    S_RETORNO := '*Confirma Visita do Nosso Técnico?*';
+    S_RETORNO := '*Hello*';
     //S_RETORNO := TWPPConnectEmoticons.robot + ' *Teste Botão com Função Copy* ' + '\n';
 
     frDemo.TWPPConnect1.SendTextMessageEx(ed_num.Text, S_RETORNO, options, 'SEUID1','SEUID2','SEUID3','SEUID4');
@@ -710,16 +708,20 @@ begin
         'createChat: true, ' +
         ///'useTemplateButtons: undefined, ' + //deprecated
         //'useTemplateButtons: true, ' + //deprecated
-        'useInteractiveMesssage: true, ' + //Android AND iOS WORKING
+        //'useInteractiveMesssage: true, ' + //Android AND iOS WORKING
         'footer: "Image With Button",  ' +
         'caption: "My image", ' +
         'type: "image", ' +
         'buttons: [ ' +
+
         '  { ' +
         '    url: "https://wppconnect-team.github.io/", ' +
         '    text: "Acesse Nosso Site" ' +
         '  }, ' +
-        '{phoneNumber: "0800404", text: "☎️ Qualquer Dúvida Ligue"},' +
+        '{phoneNumber: "0800404", text: "Qualquer Dúvida Ligue"},' +
+        //'{phoneNumber: "0800404", text: "☎️ Qualquer Dúvida Ligue"},' +
+
+        (*
         '  { ' +
         '    id: "001",  ' +
         '    text: "Show de Bola"  ' +
@@ -736,7 +738,8 @@ begin
         '            copy_code: "17981388414", ' +
         '        }) ' +
         '    } ' +
-        '  } ' +
+        '  } ' +*)
+
         ']  ';
 
       frDemo.TWPPConnect1.SendFileMessageNew(ed_num.text, LBase64.Text, options, '123');
@@ -1826,7 +1829,7 @@ begin
 
     options :=
       'createChat: true, ' +
-      'useInteractiveMesssage: true, ' + //Android AND iOS WORKING
+      'useInteractiveMesssage: true, ' +
       'caption: "My Document", ' +
       'footer: "Document With Button",  ' +
       'filename: "' + ExtractFileName(OpenDialog1.FileName) + '", ' +
@@ -1845,6 +1848,13 @@ begin
       '    id: "002",  ' +
       '    text: "Curti"  ' +
       '  },  ' + *)
+
+      '  { ' +
+      '    code: "789890", ' +
+      '    text: "Copy" '+
+      '  }, ' +
+
+      (*
       '  { ' +
       '    raw: { ' +
       '        name: "cta_copy", ' +
@@ -1854,6 +1864,8 @@ begin
       '        }) ' +
       '    } ' +
       '  } ' +
+      *)
+
       ']  ';
 
     frDemo.TWPPConnect1.SendFileMessageNew(ed_num.text, LBase64.Text, options, '123');
@@ -1922,6 +1934,9 @@ begin
     LBase64 := TStringList.Create;
     TRY
       //LBase64.LoadFromFile('C:\Executaveis\WPPConnectDemo\Base64Imagem.txt');
+      if FileExists('C:\Executaveis\WPPConnectDemo\base64Videos3.txt') then
+        LBase64.LoadFromFile('C:\Executaveis\WPPConnectDemo\base64Videos3.txt')
+      else
       if FileExists('C:\Executaveis\WPPConnectDemo\base64Videos2.txt') then
         LBase64.LoadFromFile('C:\Executaveis\WPPConnectDemo\base64Videos2.txt')
       else
@@ -1944,7 +1959,7 @@ begin
         'createChat: true, ' +
         ///'useTemplateButtons: undefined, ' + //deprecated
         //'useTemplateButtons: true, ' + //deprecated
-        'useInteractiveMesssage: true, ' + //Android AND iOS WORKING
+        //'useInteractiveMesssage: true, ' + //Android AND iOS WORKING
         'footer: "Video With Button",  ' +
         'caption: "My Video", ' +
         'type: "video", ' +
@@ -1953,20 +1968,21 @@ begin
         '    url: "https://wppconnect-team.github.io/", ' +
         '    text: "Acesse Nosso Site" ' +
         '  }, ' +
-        '{phoneNumber: "0800404", text: "☎️ Qualquer Dúvida Ligue"},' +
 
-        (*
+        (*'{phoneNumber: "0800404", text: "☎️ Qualquer Dúvida Ligue"},' +
+
+
         '  { ' +
         '    id: "001",  ' +
         '    text: "Show de Bola"  ' +
-        '  },  ' +*)
+        '  },  ' +
         '  {  ' +
         '    id: "002",  ' +
         '    text: "Curti"  ' +
         '  },  ' +
+        *)
 
-
-        '  { ' +
+        (*'  { ' +
         '    raw: { ' +
         '        name: "cta_copy", ' +
         '        buttonParamsJson: JSON.stringify({ ' +
@@ -1974,7 +1990,8 @@ begin
         '            copy_code: "17981388414", ' +
         '        }) ' +
         '    } ' +
-        '  } ' +
+        '  } ' +*)
+
         ']  ';
 
       frDemo.TWPPConnect1.SendFileMessageEx(ed_num.text, LBase64.Text, options, '123');
